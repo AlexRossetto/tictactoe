@@ -6,20 +6,16 @@ import { Leaderboard } from './components/Leaderboard';
 import { RegisterNewRoundModal } from './components/RegisterNewRoundModal';
 import Modal from 'react-modal';
 import { possibleWinningPositions } from './utils/constants';
+import { LeaderboardType } from './components/Leaderboard/interface';
 
 Modal.setAppElement('#root');
 
-interface Leaderboard {
-  winner?: string;
-  result?: string;
-}
-
 function App() {
-  const [board, setBoard] = useState(Array(9).fill(""));
+  const [board, setBoard] = useState<string[]>(Array(9).fill(""));
   const [isRegisterNewRoundModalOpen , setIsRegisterNewRoundModalOpen] = useState<boolean>(true);
   const [isPlayerOneNext, setIsPlayerOneNext] = useState<boolean>(true);
-  const [ result, setResult ] = useState<Leaderboard>({});
-  const [ leaderboard, setLeaderboard ] = useState<Leaderboard[]>([]);
+  const [ result, setResult ] = useState<LeaderboardType>({});
+  const [ leaderboard, setLeaderboard ] = useState<LeaderboardType[]>([]);
 
   useEffect(() => {
     checkWin();

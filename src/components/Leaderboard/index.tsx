@@ -1,6 +1,7 @@
 import { Container } from "./styles"
+import { LeaderboardProps, LeaderboardType } from './interface';
 
-export const Leaderboard = ({ leaderboard }: any) => {
+export const Leaderboard = ({ leaderboard } : LeaderboardProps) => {
 
   return (
     <Container>
@@ -13,7 +14,7 @@ export const Leaderboard = ({ leaderboard }: any) => {
           </tr>
         </thead>
         <tbody>
-          {leaderboard.map((round : any , idx : any) => (
+          {leaderboard.map((round : LeaderboardType , idx : number) => (
             <tr key={idx}>
               <td>{round.result}</td>
               <td>
