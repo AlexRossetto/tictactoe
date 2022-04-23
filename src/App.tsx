@@ -42,6 +42,7 @@ function App() {
   }
 
   const handleClick = (i : number) => {
+    if(result.result) return;
     const currentBoard = [...board];
     if(currentBoard[i] !== "") return;
     currentBoard[i] = isPlayerOneNext ? "X" : "O";
