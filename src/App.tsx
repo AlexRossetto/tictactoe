@@ -55,7 +55,6 @@ function App() {
 
   const checkWin = () => {
     possibleWinningPositions.forEach((currentPattern) => {
-      debugger
       const currentPlayer = board[currentPattern[0]];
       if (currentPlayer === "") return;
       let foundWinningPattern = true;
