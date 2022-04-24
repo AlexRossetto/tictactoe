@@ -3,8 +3,8 @@ import { LeaderboardType } from '../components/Leaderboard/interface';
 
 export const checkWin = (board: any) => {
   for(let i = 0; i < possibleWinningPositions.length ; i++) {
-    const [a,b,c] = possibleWinningPositions[i];
-    if(board[a] && board[a] === board[b] && board[a] === board[c]) {
+    const [firstPosition,secondPosition,thirdPosition] = possibleWinningPositions[i];
+    if(board[firstPosition] && board[firstPosition] === board[secondPosition] && board[firstPosition] === board[thirdPosition]) {
       return true;
     }
   }

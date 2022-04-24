@@ -20,7 +20,6 @@ export const App = () => {
   const [result, setResult] = useState<LeaderboardType>(INITIAL_RESULT_STATE);
   const [leaderboard, setLeaderboard] = useState<LeaderboardType[]>([]);
   const isBoardFilled = !board.includes("");
-  
 
   useEffect(() => {
     const hasWinner = checkWin(board);
@@ -60,7 +59,6 @@ export const App = () => {
     <Container>
       <BoardContainer>
         <GameBoard squares={board} onClick={handleClick}/>
-        
       </BoardContainer>
       <LeaderboardContainer>
         <Leaderboard leaderboard={leaderboard}/>
