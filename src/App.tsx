@@ -4,22 +4,36 @@ import { GameBoard } from './components/GameBoard';
 import { BoardContainer, LeaderboardContainer, Container } from './styles/styles';
 import { Leaderboard } from './components/Leaderboard';
 import { RegisterNewRoundModal } from './components/RegisterNewRoundModal';
+import { GameResultModal } from './components/GameResultModal';
 import Modal from 'react-modal';
-import { possibleWinningPositions } from './utils/constants';
 import { LeaderboardType } from './components/Leaderboard/interface';
+import { checkWin, checkIfTie } from './utils/helpers';
+import { INITIAL_RESULT_STATE } from './utils/constants';
 
 Modal.setAppElement('#root');
 
-function App() {
+export const App = () => {
   const [board, setBoard] = useState<string[]>(Array(9).fill(""));
   const [isRegisterNewRoundModalOpen , setIsRegisterNewRoundModalOpen] = useState<boolean>(true);
+  const [isGameResultModalOpen, setIsGameResultModalOpen] = useState<boolean>(false)
   const [isPlayerOneNext, setIsPlayerOneNext] = useState<boolean>(true);
-  const [ result, setResult ] = useState<LeaderboardType>({});
-  const [ leaderboard, setLeaderboard ] = useState<LeaderboardType[]>([]);
+  const [result, setResult] = useState<LeaderboardType>(INITIAL_RESULT_STATE);
+  const [leaderboard, setLeaderboard] = useState<LeaderboardType[]>([]);
+  const isBoardFilled = !board.includes("");
+  
 
   useEffect(() => {
-    checkWin();
-    checkIfTie();
+    const hasWinner = checkWin(board);
+    if(!hasWinner) {
+      checkIfTie(result, isBoardFilled, setResult, setIsGameResultModalOpen);
+    } else {
+      const players = JSON.parse(localStorage.getItem('Players') || '{}');
+       setResult({
+         winner: isPlayerOneNext ? players.playerTwo : players.playerOne,
+         result: 'Win',
+       });
+       setIsGameResultModalOpen(true);
+    }
   }, [board])
 
   useEffect(() => {
@@ -28,14 +42,6 @@ function App() {
       setLeaderboard(newLeaderBoard)
     }
   }, [result])
-
-  const restartGame = () => {
-    setIsPlayerOneNext(true)
-    setResult({});
-    setBoard(Array(9).fill(""))
-    localStorage.clear();
-    setIsRegisterNewRoundModalOpen(!isRegisterNewRoundModalOpen)
-  }
 
   const handleClick = (i : number) => {
     if(result.result) return;
@@ -50,56 +56,28 @@ function App() {
     setIsRegisterNewRoundModalOpen(false);
   }
 
-  const checkWin = () => {
-    possibleWinningPositions.forEach((currentPattern) => {
-      const currentPlayer = board[currentPattern[0]];
-      if (currentPlayer === "") return;
-      let foundWinningPattern = true;
-      currentPattern.forEach((idx) => {
-        if (board[idx] !== currentPlayer) {
-          foundWinningPattern = false;
-        }
-      });
-
-      if (foundWinningPattern) {
-        const players = JSON.parse(localStorage.getItem("Players") || '{}') ;
-        setResult({ winner: isPlayerOneNext ? players.playerTwo : players.playerOne, result: "Win" });
-      }
-    });
-  };
-
-  const checkIfTie = () => {
-    let filled = true;
-    board.forEach((square) => {
-      if (square === "") {
-        filled = false;
-      }
-    });
-
-    if (filled) {
-      setResult({ winner: "No One", result: "Tie" });
-    }
-  };
-
   return (
     <Container>
       <BoardContainer>
         <GameBoard squares={board} onClick={handleClick}/>
-        {result?.result && 
-            <div className="results">
-              <p>Result: {result.result}</p>
-              <p>Winner: {result.winner}</p>
-              <button type="button" onClick={restartGame}>Restart Game</button>
-            </div>
-          }
+        
       </BoardContainer>
       <LeaderboardContainer>
         <Leaderboard leaderboard={leaderboard}/>
       </LeaderboardContainer>
       <GlobalStyle />
       <RegisterNewRoundModal isOpen={isRegisterNewRoundModalOpen} onRequestClose={handleCloseNewTransactionModal}/>
+      <GameResultModal 
+        isOpen={isGameResultModalOpen} 
+        onRequestClose={setIsGameResultModalOpen}
+        result={result}
+        setIsPlayerOneNext={setIsPlayerOneNext}
+        setResult={setResult}
+        setIsRegisterNewRoundModalOpen={setIsRegisterNewRoundModalOpen}
+        setBoard={setBoard}
+      />
     </Container>
   );
 }
 
-export default App;
+// isOpen, onRequestClose, result, setIsPlayerOneNext, setResult, setBoard

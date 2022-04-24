@@ -8,3 +8,8 @@ export const possibleWinningPositions = [
   [0, 4, 8],
   [2, 4, 6],
 ];
+
+export const INITIAL_RESULT_STATE = {
+  winner: null,
+  result: null
+}

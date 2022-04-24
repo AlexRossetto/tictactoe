@@ -1,6 +1,6 @@
 export type LeaderboardType = {
-  winner?: string;
-  result?: string;
+  winner?: string | null;
+  result?: string | null;
 }
 
 export interface LeaderboardProps {
