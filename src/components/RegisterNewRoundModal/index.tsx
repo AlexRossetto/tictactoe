@@ -27,8 +27,8 @@ export const RegisterNewRoundModal = ({ isOpen, onRequestClose } : RegisterNewPl
     >
       <Container onSubmit={handleStartNewGame}>
         <h2>Register Players</h2>
-        <input required placeholder="Player one" value={playerOne} onChange={(e) => setPlayerOne(e.target.value)}/>
-        <input required placeholder="Player two" value={playerTwo} onChange={(e) => setPlayerTwo(e.target.value)}/>
+        <input maxLength={15} required placeholder="Player one" value={playerOne} onChange={(e) => setPlayerOne(e.target.value)}/>
+        <input maxLength={15} required placeholder="Player two" value={playerTwo} onChange={(e) => setPlayerTwo(e.target.value)}/>
         <button type="submit">Start Game</button>
       </Container>
     </Modal>

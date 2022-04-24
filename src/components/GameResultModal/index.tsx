@@ -1,10 +1,9 @@
-import { FormEvent, useState } from 'react';
 import Modal from 'react-modal';
 import { Container } from './styles'
-import {  } from './interface';
+import { GameResultModalProps } from './interface';
 import { INITIAL_RESULT_STATE } from '../../utils/constants';
 
-export const GameResultModal = ({ isOpen, onRequestClose, result, setIsPlayerOneNext, setResult, setBoard, setIsRegisterNewRoundModalOpen } : any) => {
+export const GameResultModal = ({ isOpen, onRequestClose, result, setIsPlayerOneNext, setResult, setBoard, setIsRegisterNewRoundModalOpen } : GameResultModalProps) => {
 
   const restartGame = () => {
     setIsPlayerOneNext(true)
@@ -25,7 +24,7 @@ export const GameResultModal = ({ isOpen, onRequestClose, result, setIsPlayerOne
       shouldCloseOnOverlayClick={false}
     >
       <Container onSubmit={restartGame}>
-          <h2>Result: {result.result}</h2>
+          <h2>Result: <strong>{result.result}</strong></h2>
           {result.winner && <h2>Winner: {result.winner}</h2>}
           <button type="button" onClick={restartGame}>Restart Game</button>
       </Container>

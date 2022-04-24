@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { GlobalStyle } from './styles/global';
 import { GameBoard } from './components/GameBoard';
 import { BoardContainer, LeaderboardContainer, Container } from './styles/styles';
+import { Header } from './components/Header';
 import { Leaderboard } from './components/Leaderboard';
 import { RegisterNewRoundModal } from './components/RegisterNewRoundModal';
 import { GameResultModal } from './components/GameResultModal';
@@ -22,17 +23,7 @@ export const App = () => {
   const isBoardFilled = !board.includes("");
 
   useEffect(() => {
-    const hasWinner = checkWin(board);
-    if(!hasWinner) {
-      checkIfTie(result, isBoardFilled, setResult, setIsGameResultModalOpen);
-    } else {
-      const players = JSON.parse(localStorage.getItem('Players') || '{}');
-       setResult({
-         winner: isPlayerOneNext ? players.playerTwo : players.playerOne,
-         result: 'Win',
-       });
-       setIsGameResultModalOpen(true);
-    }
+    checkIfGameEnded();
   }, [board])
 
   useEffect(() => {
@@ -44,30 +35,51 @@ export const App = () => {
 
   const handleClick = (i : number) => {
     if(result.result) return;
-    const currentBoard = [...board];
-    if(currentBoard[i] !== "") return;
-    currentBoard[i] = isPlayerOneNext ? "X" : "O";
-    setBoard(currentBoard);
+    const currentBoardCopy = [...board];
+    if(currentBoardCopy[i] !== "") return;
+    currentBoardCopy[i] = isPlayerOneNext ? "X" : "O";
+    setBoard(currentBoardCopy);
     setIsPlayerOneNext(!isPlayerOneNext);
   };
 
+  
+  const checkIfGameEnded = () => {
+    const hasWinner = checkWin(board);
+    if(!hasWinner) {
+      checkIfTie(result, isBoardFilled, setResult, setIsGameResultModalOpen);
+    } else {
+      const players = JSON.parse(localStorage.getItem('Players') || '{}');
+      setResult({
+        winner: isPlayerOneNext ? players.playerTwo : players.playerOne,
+        result: 'Win',
+      });
+      setIsGameResultModalOpen(true);
+    }
+  }
+  
   const handleCloseNewTransactionModal = () => {
     setIsRegisterNewRoundModalOpen(false);
   }
 
+  const handleCloseGameResultModal = () => {
+    setIsGameResultModalOpen(false);
+  }
+
   return (
+    <>
+    <Header isPlayerOneNext={isPlayerOneNext}/>
     <Container>
+      <GlobalStyle />
       <BoardContainer>
         <GameBoard squares={board} onClick={handleClick}/>
       </BoardContainer>
       <LeaderboardContainer>
         <Leaderboard leaderboard={leaderboard}/>
       </LeaderboardContainer>
-      <GlobalStyle />
       <RegisterNewRoundModal isOpen={isRegisterNewRoundModalOpen} onRequestClose={handleCloseNewTransactionModal}/>
       <GameResultModal 
         isOpen={isGameResultModalOpen} 
-        onRequestClose={setIsGameResultModalOpen}
+        onRequestClose={handleCloseGameResultModal}
         result={result}
         setIsPlayerOneNext={setIsPlayerOneNext}
         setResult={setResult}
@@ -75,7 +87,6 @@ export const App = () => {
         setBoard={setBoard}
       />
     </Container>
+    </>
   );
 }
-
-// isOpen, onRequestClose, result, setIsPlayerOneNext, setResult, setBoard

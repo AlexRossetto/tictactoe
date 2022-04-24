@@ -5,7 +5,7 @@ export const Container = styled.main`
   display: grid;
   grid-template-columns: 1fr 1fr;
   max-width: 1000px; 
-  height: 100vh;
+  height: 70vh;
 `
 
 export const BoardContainer = styled.section`
