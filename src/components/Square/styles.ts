@@ -8,12 +8,12 @@ export const Button = styled.button`
 	cursor: pointer;
 	outline: none;
 
-  p {
+  span {
     opacity: 0;
     transition: opacity .5s;
   }
 
-  p.selected {
+  span.selected {
     {
       opacity: 1;
     }
