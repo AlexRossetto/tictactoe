@@ -34,9 +34,8 @@ export const App = () => {
   }, [result])
 
   const handleClick = (i : number) => {
-    if(result.result) return;
     const currentBoardCopy = [...board];
-    if(currentBoardCopy[i] !== "") return;
+    if(currentBoardCopy[i] !== "" || result.result) return;
     currentBoardCopy[i] = isPlayerOneNext ? "X" : "O";
     setBoard(currentBoardCopy);
     setIsPlayerOneNext(!isPlayerOneNext);
@@ -67,9 +66,9 @@ export const App = () => {
 
   return (
     <>
+    <GlobalStyle />
     <Header isPlayerOneNext={isPlayerOneNext}/>
     <Container>
-      <GlobalStyle />
       <BoardContainer>
         <GameBoard squares={board} onClick={handleClick}/>
       </BoardContainer>

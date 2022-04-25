@@ -6,6 +6,7 @@ export const Container = styled.form`
     color: var(--text-title);
     font-size: 1.5rem;
     margin-bottom: 2rem;
+    text-align: center;
   }
 
   input {
