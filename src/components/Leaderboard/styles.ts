@@ -8,23 +8,23 @@ export const Container = styled.div`
   }
 
   div {
-    max-height: 400px;
+    max-height: 25rem;
     overflow-y: scroll;
     padding: 1rem;
   
     ::-webkit-scrollbar-track {
       -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-      border-radius: 10px;
+      border-radius: 1.2rem;
       background-color: #F5F5F5;
     }
   
     ::-webkit-scrollbar {
-      width: 12px;
+      width: 0.75rem;
       background-color: #F5F5F5;
     }
   
     ::-webkit-scrollbar-thumb {
-      border-radius: 10px;
+      border-radius: 1.2rem;
       -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
       background-color: #555;
     }
