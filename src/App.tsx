@@ -48,11 +48,13 @@ export const App = () => {
       checkIfTie(result, isBoardFilled, setResult, setIsGameResultModalOpen);
     } else {
       const players = JSON.parse(localStorage.getItem('Players') || '{}');
-      setResult({
-        winner: isPlayerOneNext ? players.playerTwo : players.playerOne,
-        result: 'Win',
-      });
-      setIsGameResultModalOpen(true);
+      setTimeout(() => {
+        setResult({
+          winner: isPlayerOneNext ? players.playerTwo : players.playerOne,
+          result: 'Win',
+        });
+        setIsGameResultModalOpen(true);
+      }, 200);
     }
   }
   
