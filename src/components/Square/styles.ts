@@ -7,4 +7,15 @@ export const Button = styled.button`
 	font-weight: 800;
 	cursor: pointer;
 	outline: none;
+
+  p {
+    opacity: 0;
+    transition: opacity .5s;
+  }
+
+  p.selected {
+    {
+      opacity: 1;
+    }
+  }
 `
