@@ -10,6 +10,9 @@ export const RegisterNewRoundModal = ({ isOpen, onRequestClose } : RegisterNewPl
 
   function handleStartNewGame(e: FormEvent) {
     e.preventDefault();
+    if(playerOne === playerTwo) {
+      return;
+    }
     localStorage.setItem("Players", JSON.stringify({ playerOne: playerOne, playerTwo: playerTwo }))
     setPlayerOne("");
     setPlayerTwo("");
