@@ -6,7 +6,7 @@ import { GameBoardProps } from './interface'
 export const GameBoard = ({ squares, onClick } : GameBoardProps) => (
   <Container>
     {squares.map((square : string, i : number) => (
-      <Square key={i} value={square} onClick={() => onClick(i)} />
+      <Square idx={i} key={i} value={square} onClick={() => onClick(i)} />
     ))}
   </Container>
 )

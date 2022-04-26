@@ -22,6 +22,7 @@ export const GameResultModal = ({ isOpen, onRequestClose, result, setIsPlayerOne
       className="react-modal-content"
       shouldCloseOnEsc={false}
       shouldCloseOnOverlayClick={false}
+      id="gameResultModal"
     >
       <Container onSubmit={restartGame}>
           <h2>Result: <strong>{result.result}</strong></h2>

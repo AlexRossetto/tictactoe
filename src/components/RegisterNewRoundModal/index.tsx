@@ -10,6 +10,8 @@ export const RegisterNewRoundModal = ({ isOpen, onRequestClose } : RegisterNewPl
 
   function handleStartNewGame(e: FormEvent) {
     e.preventDefault();
+    console.log('Tá clicando nao?')
+    debugger
     if(playerOne === playerTwo) {
       return;
     }
@@ -27,11 +29,12 @@ export const RegisterNewRoundModal = ({ isOpen, onRequestClose } : RegisterNewPl
       className="react-modal-content"
       shouldCloseOnEsc={false}
       shouldCloseOnOverlayClick={false}
+      id="RegisterNewRoundModal"
     >
       <Container onSubmit={handleStartNewGame}>
         <h2>Register Players</h2>
-        <input maxLength={15} required placeholder="Player One" value={playerOne} onChange={(e) => setPlayerOne(e.target.value)}/>
-        <input maxLength={15} required placeholder="Player Two" value={playerTwo} onChange={(e) => setPlayerTwo(e.target.value)}/>
+        <input id="playerOne" maxLength={15} required placeholder="Player One" value={playerOne} onChange={(e) => setPlayerOne(e.target.value)}/>
+        <input id="playerTwo" maxLength={15} required placeholder="Player Two" value={playerTwo} onChange={(e) => setPlayerTwo(e.target.value)}/>
         <button type="submit">Start Game</button>
       </Container>
     </Modal>

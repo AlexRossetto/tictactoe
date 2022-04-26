@@ -18,7 +18,7 @@ export const Leaderboard = ({ leaderboard } : LeaderboardProps) => {
             {leaderboard.map((round : LeaderboardType , idx : number) => (
               <tr key={idx}>
                 <td>{round.result}</td>
-                <td>
+                <td id="winner">
                   {round.winner}
                 </td>
               </tr>

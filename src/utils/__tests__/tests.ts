@@ -3,9 +3,6 @@ import { checkIfTie, checkWin } from '../helpers';
 import { fullWinningBoard, nonWinningBoard } from '../constants';
 
 
-
-
-
 describe('Tests functions that check the round result' , () => {
   it('Should receive a full board with a winning condition and return true', () => {
     const isWin = checkWin(fullWinningBoard);
