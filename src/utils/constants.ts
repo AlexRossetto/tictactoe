@@ -13,3 +13,6 @@ export const INITIAL_RESULT_STATE = {
   winner: null,
   result: null
 }
+
+export const fullWinningBoard = ["X","O","X","X","X","O","O","O","X"];
+export const nonWinningBoard = ["X","O","X","X","X","O","O","O",""];
