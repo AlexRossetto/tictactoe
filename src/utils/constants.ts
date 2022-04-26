@@ -14,5 +14,12 @@ export const INITIAL_RESULT_STATE = {
   result: null
 }
 
+export const INITIAL_ERROR_STATE = {
+  error: false,
+  playerOneInputErrorMessage: '',
+  playerTwoInputErrorMessage: '',
+}
+
 export const fullWinningBoard = ["X","O","X","X","X","O","O","O","X"];
 export const nonWinningBoard = ["X","O","X","X","X","O","O","O",""];
+

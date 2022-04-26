@@ -3,6 +3,7 @@ import Modal from 'react-modal';
 import { Container } from './styles';
 import { RegisterNewPlayersModalProps, ErrorType } from './interface';
 import { validateErrors } from './utils'
+import { INITIAL_ERROR_STATE } from '../../utils/constants';
 
 export const RegisterNewRoundModal = ({ isOpen, onRequestClose } : RegisterNewPlayersModalProps) => {
 
@@ -17,6 +18,9 @@ export const RegisterNewRoundModal = ({ isOpen, onRequestClose } : RegisterNewPl
       console.log(errors, "oq temos aqui?")
       setError(errors)
       return;
+    } else {
+      console.log("Ele cai aqui?")
+      setError(INITIAL_ERROR_STATE)
     }
     localStorage.setItem("Players", JSON.stringify({ playerOne: playerOne, playerTwo: playerTwo }))
     setPlayerOne("");
