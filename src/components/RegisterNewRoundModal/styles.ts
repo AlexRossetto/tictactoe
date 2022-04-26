@@ -28,6 +28,12 @@ export const Container = styled.form`
     }
   }
 
+  span {
+      font-size: .75rem;
+      color: red;
+      padding: .2rem;
+    }
+
   button[type="submit"] {
     width: 100%;
     padding: 1 0.5rem;

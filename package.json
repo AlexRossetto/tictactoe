@@ -23,7 +23,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "yarn jest",
-    "cy:run": "cypress open ./cypress/integration/App.test.js",
+    "cy:start": "cypress open ./cypress/integration/App.test.js",
+    "cy:run": "start-test 3000 cy:start",
     "eject": "react-scripts eject"
   },
   "browserslist": {
@@ -45,6 +46,7 @@
     "cypress": "^9.6.0",
     "eslint": "^8.14.0",
     "jest": "27.4.0",
+    "start-server-and-test": "^1.14.0",
     "ts-jest": "^27.1.4"
   }
 }
