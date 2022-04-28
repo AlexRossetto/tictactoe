@@ -1,4 +1,4 @@
-# Tic Tac Toe\*\*
+# Tic Tac Toe
 
 This is a Tic Tac Toe game developed with **React.js** using **styled-components** and **typescript**.
 
