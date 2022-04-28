@@ -4,5 +4,6 @@
   "transform": {
     "'^.+\\.(ts|tsx)?$'": "ts-jest",
     "^.+\\.(js|jsx)$": "babel-jest"
-  }
+  },
+  "testPathIgnorePatterns": ["./cypress", "./src/utils/__tests__/constants.ts"]
 }

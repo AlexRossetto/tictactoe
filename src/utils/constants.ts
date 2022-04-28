@@ -19,7 +19,3 @@ export const INITIAL_ERROR_STATE = {
   playerOneInputErrorMessage: '',
   playerTwoInputErrorMessage: '',
 }
-
-export const fullWinningBoard = ["X","O","X","X","X","O","O","O","X"];
-export const nonWinningBoard = ["X","O","X","X","X","O","O","O",""];
-

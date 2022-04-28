@@ -1,6 +1,6 @@
 import { INITIAL_RESULT_STATE } from '../constants';
 import { checkIfTie, checkWin } from '../helpers';
-import { fullWinningBoard, nonWinningBoard } from '../constants';
+import { fullWinningBoard, nonWinningBoard } from './constants';
 
 
 describe('Tests functions that check the round result' , () => {
