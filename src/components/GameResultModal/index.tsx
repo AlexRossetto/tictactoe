@@ -26,7 +26,7 @@ export const GameResultModal = ({
     setIsRegisterNewRoundModalOpen(true);
     setPlayers({ playerOne: null, playerTwo: null })
     onRequestClose();
-  }, [result]) 
+  }, []) 
   
   
   return (
