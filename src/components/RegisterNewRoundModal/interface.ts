@@ -1,7 +1,7 @@
 export interface RegisterNewPlayersModalProps {
   isOpen: boolean;
   onRequestClose: () => void;
-  players: {playerOne: string | null, playerTwo: string | null},
+  players: Players,
   setPlayers: (props: Players) => void;
 }
 export interface ErrorType {
