@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { GlobalStyle } from './styles/global';
 import { GameBoard } from './components/GameBoard';
 import { BoardContainer, LeaderboardContainer, Container } from './styles/styles';
@@ -36,14 +36,6 @@ export const App = () => {
     }
   }, [result])
 
-  const handleClick = (i : number) => {
-    const currentBoardCopy = [...board];
-    if(currentBoardCopy[i] !== "" || result.result) return;
-    currentBoardCopy[i] = isPlayerOneNext ? "X" : "O";
-    setBoard(currentBoardCopy);
-    setIsPlayerOneNext(!isPlayerOneNext);
-  };
-
   const checkIfGameEnded = () => {
     const hasWinner = checkWin(board);
     if(!hasWinner) {
@@ -63,6 +55,24 @@ export const App = () => {
       }, 200);
     }
   }
+
+  const restartGame = useCallback(() => {
+    setIsPlayerOneNext(true)
+    setResult(INITIAL_RESULT_STATE);
+    setBoard(Array(9).fill(""))
+    localStorage.clear();
+    setRound(round+1)
+    setIsRegisterNewRoundModalOpen(true);
+    setPlayers({ playerOne: null, playerTwo: null })
+  }, []) 
+
+  const handleClick = (i : number) => {
+    const currentBoardCopy = [...board];
+    if(currentBoardCopy[i] !== "" || result.result) return;
+    currentBoardCopy[i] = isPlayerOneNext ? "X" : "O";
+    setBoard(currentBoardCopy);
+    setIsPlayerOneNext(!isPlayerOneNext);
+  };
   
   const handleCloseNewTransactionModal = () => {
     setIsRegisterNewRoundModalOpen(false);
@@ -93,13 +103,7 @@ export const App = () => {
           isOpen={isGameResultModalOpen} 
           onRequestClose={handleCloseGameResultModal}
           result={result}
-          setIsPlayerOneNext={setIsPlayerOneNext}
-          setResult={setResult}
-          setIsRegisterNewRoundModalOpen={setIsRegisterNewRoundModalOpen}
-          setBoard={setBoard}
-          round={round}
-          setRound={setRound}
-          setPlayers={setPlayers}
+          restartGame={restartGame}
         />
       </Container>
     </>
