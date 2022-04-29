@@ -14,8 +14,6 @@ export const Button = styled.button`
   }
 
   span.selected {
-    {
-      opacity: 1;
-    }
+    opacity: 1;
   }
 `
