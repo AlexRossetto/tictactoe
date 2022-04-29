@@ -2,8 +2,7 @@ import { Container } from "./styles";
 import { HeaderProps } from "./interface";
 
 
-export const Header = ({isPlayerOneNext} : HeaderProps) => {
-  const players = JSON.parse(localStorage.getItem('Players') || '{}');
+export const Header = ({ isPlayerOneNext, players } : HeaderProps) => {
 
   return (
     <Container>

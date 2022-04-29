@@ -20,3 +20,8 @@ export const INITIAL_ERROR_STATE = {
   playerOneInputErrorMessage: '',
   playerTwoInputErrorMessage: '',
 }
+
+export const INITIAL_PLAYERS_STATES = {
+  playerOne: null, 
+  playerTwo: null
+}

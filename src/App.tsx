@@ -9,7 +9,8 @@ import { GameResultModal } from './components/GameResultModal';
 import Modal from 'react-modal';
 import { LeaderboardType } from './components/Leaderboard/interface';
 import { checkWin, checkIfTie } from './utils/helpers';
-import { INITIAL_RESULT_STATE } from './utils/constants';
+import { INITIAL_RESULT_STATE, INITIAL_PLAYERS_STATES } from './utils/constants';
+import { Players } from './components/RegisterNewRoundModal/interface'
 
 Modal.setAppElement('#root');
 
@@ -21,6 +22,7 @@ export const App = () => {
   const [result, setResult] = useState<LeaderboardType>(INITIAL_RESULT_STATE);
   const [leaderboard, setLeaderboard] = useState<LeaderboardType[]>([]);
   const [round, setRound] = useState<number>(1)
+  const [players, setPlayers] = useState<Players>(INITIAL_PLAYERS_STATES)
   const isBoardFilled = !board.includes("");
 
   useEffect(() => {
@@ -51,7 +53,6 @@ export const App = () => {
         setIsGameResultModalOpen(true);
       }   
     } else {
-      const players = JSON.parse(localStorage.getItem('Players') || '{}');
       setTimeout(() => {
         setResult({
           winner: isPlayerOneNext ? players.playerTwo : players.playerOne,
@@ -74,7 +75,7 @@ export const App = () => {
   return (
     <>
       <GlobalStyle />
-      <Header isPlayerOneNext={isPlayerOneNext}/>
+      <Header isPlayerOneNext={isPlayerOneNext} players={players}/>
       <Container>
         <BoardContainer>
           <GameBoard squares={board} onClick={handleClick}/>
@@ -85,6 +86,8 @@ export const App = () => {
         <RegisterNewRoundModal 
           isOpen={isRegisterNewRoundModalOpen} 
           onRequestClose={handleCloseNewTransactionModal}
+          players={players}
+          setPlayers={setPlayers}
         />
         <GameResultModal 
           isOpen={isGameResultModalOpen} 
@@ -96,6 +99,7 @@ export const App = () => {
           setBoard={setBoard}
           round={round}
           setRound={setRound}
+          setPlayers={setPlayers}
         />
       </Container>
     </>

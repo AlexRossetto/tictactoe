@@ -5,7 +5,7 @@ import { RegisterNewPlayersModalProps, ErrorType } from './interface';
 import { validateErrors } from './utils'
 import { INITIAL_ERROR_STATE } from '../../utils/constants';
 
-export const RegisterNewRoundModal = ({ isOpen, onRequestClose } : RegisterNewPlayersModalProps) => {
+export const RegisterNewRoundModal = ({ isOpen, onRequestClose, players, setPlayers } : RegisterNewPlayersModalProps) => {
   const [playerOne, setPlayerOne] = useState<string>('');
   const [playerTwo, setPlayerTwo] = useState<string>('');
   const [error, setError] = useState<ErrorType>();
@@ -19,9 +19,9 @@ export const RegisterNewRoundModal = ({ isOpen, onRequestClose } : RegisterNewPl
     } else {
       setError(INITIAL_ERROR_STATE)
     }
-    localStorage.setItem("Players", JSON.stringify({ playerOne: playerOne, playerTwo: playerTwo }))
     setPlayerOne("");
     setPlayerTwo("");
+    setPlayers({ playerOne: playerOne, playerTwo: playerTwo })
     onRequestClose();
   }
 

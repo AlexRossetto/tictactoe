@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import Modal from 'react-modal';
 import { Container } from './styles'
 import { GameResultModalProps } from './interface';
@@ -12,18 +13,21 @@ export const GameResultModal = ({
     setBoard, 
     setIsRegisterNewRoundModalOpen, 
     setRound, 
+    setPlayers,
     round
   } : GameResultModalProps) => {
 
-  const restartGame = () => {
+  const restartGame = useCallback(() => {
     setIsPlayerOneNext(true)
     setResult(INITIAL_RESULT_STATE);
     setBoard(Array(9).fill(""))
     localStorage.clear();
     setRound(round+1)
     setIsRegisterNewRoundModalOpen(true);
+    setPlayers({ playerOne: null, playerTwo: null })
     onRequestClose();
-  }
+  }, [result]) 
+  
   
   return (
     <Modal
