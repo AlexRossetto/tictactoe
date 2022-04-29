@@ -36,10 +36,10 @@ export const GameResultModal = ({
       id="gameResultModal"
     >
       <Container onSubmit={restartGame}>
-        <h2>
-          Result: <strong>{result.result}</strong>
-        </h2>
-        {result.winner && <h2>Winner: {result.winner}</h2>}
+        <h2>Result: <strong>{result.result}</strong></h2>
+        {result.winner && 
+          <h2>Winner: {result.winner}</h2>
+        }
         <button type="button" onClick={restartGame}>Restart Game</button>
       </Container>
     </Modal>
