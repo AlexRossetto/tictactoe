@@ -15,11 +15,12 @@ Modal.setAppElement('#root');
 
 export const App = () => {
   const [board, setBoard] = useState<string[]>(Array(9).fill(""));
-  const [isRegisterNewRoundModalOpen , setIsRegisterNewRoundModalOpen] = useState<boolean>(true);
+  const [isRegisterNewRoundModalOpen, setIsRegisterNewRoundModalOpen] = useState<boolean>(true);
   const [isGameResultModalOpen, setIsGameResultModalOpen] = useState<boolean>(false)
   const [isPlayerOneNext, setIsPlayerOneNext] = useState<boolean>(true);
   const [result, setResult] = useState<LeaderboardType>(INITIAL_RESULT_STATE);
   const [leaderboard, setLeaderboard] = useState<LeaderboardType[]>([]);
+  const [round, setRound] = useState<number>(1)
   const isBoardFilled = !board.includes("");
 
   useEffect(() => {
@@ -41,13 +42,12 @@ export const App = () => {
     setIsPlayerOneNext(!isPlayerOneNext);
   };
 
-  
   const checkIfGameEnded = () => {
     const hasWinner = checkWin(board);
     if(!hasWinner) {
       const isTie = checkIfTie(result, isBoardFilled);
       if(isTie) {
-        setResult({ winner: null, result: 'Tie' });
+        setResult({ winner: null, result: 'Tie', round: round });
         setIsGameResultModalOpen(true);
       }   
     } else {
@@ -56,6 +56,7 @@ export const App = () => {
         setResult({
           winner: isPlayerOneNext ? players.playerTwo : players.playerOne,
           result: 'Win',
+          round: round
         });
         setIsGameResultModalOpen(true);
       }, 200);
@@ -72,26 +73,31 @@ export const App = () => {
 
   return (
     <>
-    <GlobalStyle />
-    <Header isPlayerOneNext={isPlayerOneNext}/>
-    <Container>
-      <BoardContainer>
-        <GameBoard squares={board} onClick={handleClick}/>
-      </BoardContainer>
-      <LeaderboardContainer>
-        <Leaderboard leaderboard={leaderboard}/>
-      </LeaderboardContainer>
-      <RegisterNewRoundModal isOpen={isRegisterNewRoundModalOpen} onRequestClose={handleCloseNewTransactionModal}/>
-      <GameResultModal 
-        isOpen={isGameResultModalOpen} 
-        onRequestClose={handleCloseGameResultModal}
-        result={result}
-        setIsPlayerOneNext={setIsPlayerOneNext}
-        setResult={setResult}
-        setIsRegisterNewRoundModalOpen={setIsRegisterNewRoundModalOpen}
-        setBoard={setBoard}
-      />
-    </Container>
+      <GlobalStyle />
+      <Header isPlayerOneNext={isPlayerOneNext}/>
+      <Container>
+        <BoardContainer>
+          <GameBoard squares={board} onClick={handleClick}/>
+        </BoardContainer>
+        <LeaderboardContainer>
+          <Leaderboard leaderboard={leaderboard}/>
+        </LeaderboardContainer>
+        <RegisterNewRoundModal 
+          isOpen={isRegisterNewRoundModalOpen} 
+          onRequestClose={handleCloseNewTransactionModal}
+        />
+        <GameResultModal 
+          isOpen={isGameResultModalOpen} 
+          onRequestClose={handleCloseGameResultModal}
+          result={result}
+          setIsPlayerOneNext={setIsPlayerOneNext}
+          setResult={setResult}
+          setIsRegisterNewRoundModalOpen={setIsRegisterNewRoundModalOpen}
+          setBoard={setBoard}
+          round={round}
+          setRound={setRound}
+        />
+      </Container>
     </>
   );
 }

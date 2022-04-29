@@ -5,11 +5,6 @@ export const GlobalStyle = createGlobalStyle`
     --background: #f0f2f5;
     --green: #33CC95;
     --blue-light: #6933ff;
-
-    --text-title: #363f5f;
-    --text-body: #969cb3;
-
-    --shape: #FFFFFF;
   }
 
   * {
@@ -41,7 +36,6 @@ export const GlobalStyle = createGlobalStyle`
   h1,h2,h3,h4,h5,h6,strong {
     font-weight: 600;
   }
-
 
   button {
     cursor: pointer;

@@ -52,14 +52,3 @@ export const LeaderboardContainer = styled.section`
   align-items: center;
   flex-direction: column;
 `
-
-
-
-// margin: 0 auto;
-//   display: flex;
-//   justify-content: center;
-//   align-content: center;
-//   align-items: center;
-//   max-width: 300px; 
-//   height: 100vh;
-//   flex-direction: column;

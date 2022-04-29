@@ -7,4 +7,6 @@ export interface GameResultModalProps {
   setResult: (prop: LeaderboardType) => void;
   setBoard: (prop: string[]) => void;
   setIsRegisterNewRoundModalOpen: (prop: boolean) => void;
+  setRound: (prop: number) => void;
+  round: number;
 }

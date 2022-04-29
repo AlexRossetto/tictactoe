@@ -10,6 +10,7 @@ export const possibleWinningPositions = [
 ];
 
 export const INITIAL_RESULT_STATE = {
+  round: null,
   winner: null,
   result: null
 }
